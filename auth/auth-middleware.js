@@ -1,9 +1,11 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const secret = require("../config/secrets");
 
 const Users = require("../users/users-models");
 
-module.exports = { restricted };
-async function restricted(req, res, next) {
+module.exports = { authenticate, restricted };
+async function authenticate(req, res, next) {
   try {
     const { username, password } = req.body;
 
@@ -22,5 +24,24 @@ async function restricted(req, res, next) {
     }
   } catch (error) {
     return res.status(400).json({ message: "Server error" });
+  }
+}
+
+async function restricted(req, res, next) {
+  try {
+    const token = req.headers.authorization;
+
+    if (token) {
+      jwt.verify(token, secret.jwtSecret, (err, decodedToken) => {
+        if (err) {
+          res.status(401).json({ you: "Unauthorized!!!" });
+        } else {
+          req.decodedToken = decodedToken;
+          next();
+        }
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error });
   }
 }

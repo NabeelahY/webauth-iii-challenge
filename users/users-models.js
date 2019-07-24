@@ -10,9 +10,9 @@ function addUser(user) {
     .then(([id]) => getUserById(id));
 }
 
-function findUserBy(username) {
+function findUserBy(filter) {
   return db("users")
-    .where(username)
+    .where(filter)
     .first();
 }
 

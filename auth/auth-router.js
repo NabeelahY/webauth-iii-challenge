@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const secret = require("../config/secrets");
 const Users = require("../users/users-models");
-const { restricted } = require("./auth-middleware");
+const { authenticate } = require("./auth-middleware");
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", restricted, async (req, res) => {
+router.post("/login", authenticate, async (req, res) => {
   try {
     const token = generateToken(req.user);
     res.status(200).json({ message: `Welcome ${req.user.username}!`, token });
@@ -30,7 +30,8 @@ router.post("/login", restricted, async (req, res) => {
 function generateToken(user) {
   const payload = {
     sub: user.id,
-    username: user.username
+    username: user.username,
+    department: user.department
   };
 
   const options = {
