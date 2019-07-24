@@ -17,7 +17,7 @@ async function restricted(req, res, next) {
       if (req.user && bcrypt.compareSync(password, req.user.password)) {
         next();
       } else {
-        res.status(401).json({ message: "Unauthorized!" });
+        res.status(401).json({ message: "Unauthorized! Please register" });
       }
     }
   } catch (error) {
