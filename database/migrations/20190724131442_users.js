@@ -1,3 +1,19 @@
-exports.up = function(knex) {};
+exports.up = function(knex) {
+  return knex.schema.createTable("users", users => {
+    users.increments();
 
-exports.down = function(knex) {};
+    users
+      .string("username")
+      .notNullable()
+      .unique();
+    users.string("password").notNullable();
+    users
+      .string("department")
+      .notNullable()
+      .unique();
+  });
+};
+
+exports.down = function(knex) {
+  return knex.schema.dropTableIfExists("users");
+};
