@@ -10,7 +10,6 @@ exports.up = function(knex) {
     users
       .string("department")
       .notNullable()
-      .unique();
   });
 };
 
