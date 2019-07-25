@@ -1,12 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import "./App.css";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <div>Hello!</div>
         <nav>
           <NavLink to="/">
             <div>Home</div>
@@ -19,7 +20,8 @@ function App() {
           </NavLink>
         </nav>
       </div>
-      <Route path="/register" />
+      <Route path="/register" component={Signup} />
+      <Route path="/login" component={Login} />
     </Router>
   );
 }
