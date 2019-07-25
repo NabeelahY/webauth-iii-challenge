@@ -20,8 +20,8 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", authenticate, async (req, res) => {
   try {
-    const token = generateToken(req.user);
-    res.status(200).json({ message: `Welcome ${req.user.username}!`, token });
+    const token = generateToken(req.user[0]);
+    res.status(200).json({ message: `Welcome ${req.user[0].username}!`, token });
   } catch (error) {
     res.status(500).json("Cannot login");
   }

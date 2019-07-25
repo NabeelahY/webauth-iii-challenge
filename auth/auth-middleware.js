@@ -16,7 +16,8 @@ async function authenticate(req, res, next) {
     } else {
       const loggedUser = await Users.findUserBy({ username });
       req.user = loggedUser;
-      if (req.user && bcrypt.compareSync(password, req.user.password)) {
+      console.log(req.user);
+      if (req.user && bcrypt.compareSync(password, req.user[0].password)) {
         next();
       } else {
         res.status(401).json({ message: "Unauthorized! Please register" });

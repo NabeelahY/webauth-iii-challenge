@@ -12,8 +12,7 @@ function addUser(user) {
 
 function findUserBy(filter) {
   return db("users")
-    .where(filter)
-    .first();
+    .where(filter);
 }
 
 function getUserById(id) {
