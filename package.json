@@ -2,6 +2,9 @@
   "name": "webauth-iii-challenge",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js"
+  },
   "repository": "https://github.com/NabeelahY/webauth-iii-challenge.git",
   "author": "Nabeelah <nabeelahyousuph@gmail.com>",
   "license": "MIT",
@@ -13,5 +16,8 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.19.1",
     "sqlite": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }

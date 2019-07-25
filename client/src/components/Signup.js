@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Signup = () => {
+const Signup = props => {
   const [userData, setUser] = useState({
     username: "",
     department: "",
@@ -17,11 +17,17 @@ const Signup = () => {
         password
       })
       .then(res => res)
-      .catch(err => err);
+      .catch(err => err)
+      .finally(() => props.history.push("/"));
   };
 
   return (
-    <form onSubmit={() => userSignup(userData)}>
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        userSignup(userData);
+      }}
+    >
       <h1>Register</h1>
       <input
         type="text"

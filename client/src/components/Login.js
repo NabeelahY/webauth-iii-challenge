@@ -8,19 +8,23 @@ const Login = props => {
   });
 
   const userLogin = user => {
-    const { username, password } = user;
+    console.log(user);
     return axios
-      .post("http://localhost:2000/api/auth/login", {
-        username,
-        password
+      .post("http://localhost:2000/api/auth/login", user)
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
       })
-      .then(res => res)
       .catch(err => err)
       .finally(() => props.history.push("/"));
   };
 
   return (
-    <form onSubmit={() => userLogin(userData)}>
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        userLogin(userData);
+      }}
+    >
       <h1>Login</h1>
       <input
         type="text"
